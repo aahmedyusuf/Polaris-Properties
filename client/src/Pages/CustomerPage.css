@@ -1,0 +1,58 @@
+body{
+    background-color: antiquewhite;
+}
+.form{
+    background-color:  rgb(255, 255, 255);
+    width: 500px;
+    height: 600px;
+    margin-top: 5%;
+    border-radius: 5%;
+    box-shadow: 10px 10px 10px rgb(184, 190, 184);
+}
+
+.loginB{
+    width: 300px;
+    height: 50px;
+    margin-top: 30px;
+    border-radius: 30px;
+    border: 0ch;
+    
+    transition: 1.5s;
+
+}
+.loginB:hover{
+    transition: 1.5s;
+    box-shadow: 10px 10px 10px rgb(184, 190, 184);
+    background-color: rgb(85, 255, 198);
+    cursor: pointer;
+}
+.title{
+    padding-top: 50px;
+    font-style: normal;
+    font-weight: 150;
+    font-size: 50px;
+}
+
+.field{
+    margin-top: 50px;
+    width: 250px;
+    height: 30px;
+    font-size: large;
+}
+
+.signup{
+    margin-top: 20px;
+    width: 200px;
+    height: 30px;
+    border: 0ch;
+    border-radius: 30px;
+    transition: 1.5s;
+
+}
+
+.signup:hover{
+    transition: 1.5s;
+    box-shadow: 10px 10px 10px rgb(184, 190, 184);
+    background-color: rgb(85, 255, 198);
+    cursor: pointer;
+}

@@ -5,7 +5,7 @@ const morgan = require("morgan");
 const home = require("./routes/home");
 const path = require("path");
 
-//var database = require('./Database');
+var database = require('./Database');
 
 
 const port = process.env.PORT || 4000;
@@ -25,7 +25,23 @@ app.use("/api/home", home);
 app.get("/api/status", (req, res) =>{
   res.send("Server is running");
 })
+app.get("/api/createuser", async (req, res) =>{
+  const response = await database.CreateUser(req.query.username,req.query.password,req.query.type);
+  res.json(response);
+})
+app.get("/api/updateseller", async (req, res) =>{
+  const response = await database.UpdateSeller(req.query.username,req.query.price);
+  res.json(response);
+})
+app.get("/api/getproperties", async (req, res) =>{
+  const response = await database.Get_AllProperties();
+  res.json(response);
+})
 
+app.get("/api/getproperty", async (req, res) =>{
+  const response = await database.Get_Property(req.query.amount,req.query.state, req.query.city, req.query.zipcode,req.query.type, req.query.rooms, req.query.bedrooms);
+  res.json(response);
+})
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname + "/client/build/index.html"));
