@@ -1,50 +1,86 @@
 import React from 'react';
 import './Home.css';
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { useNavigate,Link } from 'react-router-dom';
+import { BsFillFilePersonFill, BsCurrencyDollar,BsFillGeoAltFill } from "react-icons/bs";
+import { FaDog,FaBath,FaBuilding} from "react-icons/fa";
+import { MdBedroomParent } from "react-icons/md";
+import { endPoint } from './endpoint';
 
 function Home(){
-    return(
-        <div>
-            <Navbar></Navbar>
-            <Card_Parent/>
-        </div>
-    )
+    const username = sessionStorage.getItem('username');
+    const type = sessionStorage.getItem('type');
+    console.log(type);
+    if(username == null || type != 'customer'){
+        return(
+            <div>
+                <center>
+                    <h1>Login to view this page</h1>
+                </center>
+            </div>
+        )
+    }else{
+        return(
+            <div>
+                <Navbar></Navbar>
+                <Card_Parent/>
+            </div>
+        )
+    }
 }
 function Navbar(){
-    function handleSubmit(){
-        
-    }
+
     return (
         <ul className = 'nav_parent'>
-            <li className='nav_button'> <Link to="/"> <span onClick={handleSubmit}>Logout</span> </Link></li> 
+            <li className='nav_button'> <Link to="/"> <span onClick={() => sessionStorage.clear()}>Logout</span> </Link></li> 
         </ul>
     );
 }
 function Card_Parent(){
+
+    const [cards, setcards] = useState([]);
+
+    useEffect(() => {
+        const username = sessionStorage.getItem('username');
+        fetch(`${endPoint}/getproperties/`)
+        .then(response => response.json())
+        .then(data => {
+            setcards(data);
+            
+        })
+    },[]);
+
+    const listItems = cards.map((card,index) =>
+        <Card key={index} props={card}/>
+    );
+
     return(
         <div className = 'Card_Parent'>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
-            <Card/>
+           {listItems}
         </div>
     )
 }
 
-function Card(){
+function Card({props}){
+    const navigate = useNavigate();
+
+    function handleSubmit(){
+        sessionStorage.setItem('id', props.id);
+        navigate('/property_details');
+        console.log("button clicked")
+    }
+
     return(
         <div className = 'Card'>
-            <img src = 'https://www.rocketmortgage.com/resources-cmsassets/RocketMortgage.com/Article_Images/Large_Images/TypesOfHomes/types-of-homes-hero.jpg' className = 'Card_img'/>
+            <img src = {props.url} className = 'Card_img'/>
             <br/>
             <center>
                 
-            <h3 className='Card_title'>The Ivey on Boren</h3>
-            <h5 className='Card_address'>* Address: 2019 Boren Ave, Seattle, WA 98121</h5>
-            <h5>* Dog Friendly Cat Friendly In Unit Washer & Dryer Dishwasher</h5>
-            <h4>* Monthly Rent: $2,195</h4>
-            <button className = 'Card_Button'>Click for more information</button>
+            <h3 className='Card_title'>{props.title}</h3>
+            <h5 className='Card_address'><BsFillGeoAltFill/> {props.city} , {props.state} , {props.zipcode}</h5>
+            <h5><FaBuilding/> {props.description}</h5>
+            <h4><BsCurrencyDollar/> Monthly Rent: ${props.amount}</h4>
+            <button className = 'Card_Button' onClick={()=>handleSubmit()}>Click for more information</button>
             </center>
         </div>
     )

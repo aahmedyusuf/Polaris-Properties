@@ -29,6 +29,10 @@ app.get("/api/createuser", async (req, res) =>{
   const response = await database.CreateUser(req.query.username,req.query.password,req.query.type);
   res.json(response);
 })
+app.get("/api/verifyuser", async (req, res) =>{
+  const response = await database.VerifyUser(req.query.username,req.query.password,req.query.type);
+  res.json(response);
+})
 app.get("/api/updateseller", async (req, res) =>{
   const response = await database.UpdateSeller(req.query.username,req.query.price);
   res.json(response);
@@ -39,7 +43,24 @@ app.get("/api/getproperties", async (req, res) =>{
 })
 
 app.get("/api/getproperty", async (req, res) =>{
-  const response = await database.Get_Property(req.query.amount,req.query.state, req.query.city, req.query.zipcode,req.query.type, req.query.rooms, req.query.bedrooms);
+  const response = await database.Get_Property(req.query.amount,req.query.state, req.query.city, req.query.zipcode,req.query.type, req.query.rooms, req.query.bathrooms);
+  res.json(response);
+})
+app.get("/api/getpropertybyID", async (req, res) =>{
+  const response = await database.Get_Property_id(req.query.id);
+  res.json(response);
+})
+app.get("/api/getmyproperties", async (req, res) =>{
+  const response = await database.Get_MyProperties(req.query.username);
+  res.json(response);
+})
+app.post("/api/createproperty", async (req, res) =>{
+  const response = await database.Create_Property(req.body.username, req.body.title, req.body.description, req.body.url, req.body.amount, req.body.state, req.body.city, req.body.zipcode,req.body.type, req.body.rooms, req.body.bathrooms, req.body.purchase);
+  //res.json(response);
+})
+
+app.get("/api/remove_property", async (req, res) =>{
+  const response = await database.Remove_Property(req.query.id);
   res.json(response);
 })
 

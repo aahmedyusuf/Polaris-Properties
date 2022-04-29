@@ -16,8 +16,21 @@ function Customer_login() {
       };
       const [login, setlogin] = useState(user);
 
-    function HandleLogin(){
-
+      function HandleLogin(){
+        fetch(endPoint+`/verifyuser/?username=${login.username}&password=${login.password}&type=customer`)
+        .then(response => response.json())
+        .then(data => {
+            if(data === 'false')
+            {
+                setlogin({ ...login, message: `Failed to login: Either wrong username or password` })
+            }else{
+                sessionStorage.setItem('username', login.username);
+                sessionStorage.setItem('password', login.password);
+                sessionStorage.setItem('type', 'customer');
+                navigate('/home');
+                setlogin({ ...login, message: `` })
+               }
+        })
     }
     function changePage(value){
         navigate(`/${value}`)
