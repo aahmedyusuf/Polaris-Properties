@@ -6,7 +6,10 @@ import Seller_Signup from './Pages/seller_signup';
 import Attentition_Page  from './Pages/Attentition_Page';
 import Customer_login from './Pages/Customer_login';
 import Customer_signup from './Pages/Customer_signup';
-
+import Seller_home from './Pages/seller_home';
+import Seller_Create_Property from './Pages/seller_createProperty';
+import Property_details from './Pages/property_details';
+import Home from './Pages/Home';
 function App() {
   return (
     <BrowserRouter>
@@ -17,14 +20,26 @@ function App() {
         <Route path="/Sellerlogin">
           <Route index element={<Seller_Login />} />
         </Route>
-        <Route path="/SellerSingup">
+        <Route path="/Sellersingup">
           <Route index element={<Seller_Signup />} />
         </Route>
         <Route path="/Customerlogin">
           <Route index element={<Customer_login />} />
         </Route>
-        <Route path="/customerSignup">
+        <Route path="/customersignup">
           <Route index element={<Customer_signup />} />
+        </Route>
+        <Route path="/seller_home">
+          <Route index element={<Seller_home />} />
+        </Route>
+        <Route path="/create_property">
+          <Route index element={<Seller_Create_Property />} />
+        </Route>
+        <Route path="/property_details">
+          <Route index element={<Property_details />} />
+        </Route>
+        <Route path="/home">
+          <Route index element={<Home />} />
         </Route>
       </Routes>
     </BrowserRouter>

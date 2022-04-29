@@ -57,7 +57,7 @@ async function Get_AllProperties(){
     }
 }
 
-async function Get_Property(amount,state,city,zipcode,type,rooms,bedrooms ){
+async function Get_Property(amount,state,city,zipcode,type,rooms,bathrooms ){
     try{
 
         amount = amount.length == 0 ? 'amount':amount;
@@ -66,9 +66,9 @@ async function Get_Property(amount,state,city,zipcode,type,rooms,bedrooms ){
         zipcode = zipcode.length == 0 ? 'zipcode':zipcode;
         type = type.length == 0 ? 'type':type;
         rooms = rooms.length == 0 ? 'rooms':rooms;
-        bedrooms = bedrooms.length == 0 ? 'bedrooms':bedrooms;
+        bathrooms = bathrooms.length == 0 ? 'bathrooms':bathrooms;
 
-        const query = `select * from property where amount = ${amount} And state = ${state} And city = ${city} & zipcode = ${zipcode} & type = ${type} & room = ${rooms} & bedrooms = ${bedrooms}`;
+        const query = `select * from property where amount = ${amount} And state = ${state} And city = ${city} & zipcode = ${zipcode} & type = ${type} & room = ${rooms} & bathrooms = ${bathrooms}`;
 
         const response = await pool.query(query);
     }catch{
