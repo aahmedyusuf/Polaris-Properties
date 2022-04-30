@@ -3,19 +3,24 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Seller_Login from './Pages/seller_login.js';
 import Seller_Signup from './Pages/seller_signup';
-import Attentition_Page  from './Pages/Attentition_Page';
+import Attentition_Page from './Pages/Attentition_Page';
 import Customer_login from './Pages/Customer_login';
 import Customer_signup from './Pages/Customer_signup';
 import Seller_home from './Pages/seller_home';
 import Seller_Create_Property from './Pages/seller_createProperty';
 import Property_details from './Pages/property_details';
+import DesignAdmin from './Pages/admin.js';
+
 import Home from './Pages/Home';
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/">
+        <Route path="/">
           <Route index element={<Attentition_Page />} />
+        </Route>
+        <Route path="/adminpanel">
+          <Route index element={<DesignAdmin />} />
         </Route>
         <Route path="/Sellerlogin">
           <Route index element={<Seller_Login />} />
@@ -43,7 +48,7 @@ function App() {
         </Route>
       </Routes>
     </BrowserRouter>
-    );
+  );
 }
 
 export default App;
