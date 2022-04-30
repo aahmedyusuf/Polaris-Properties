@@ -25,7 +25,7 @@ function Attentition_Page() {
                 <br />
                 <button className="action-Button" onClick={() => handle('Sellerlogin')}> Seller </button>
                 <br />
-                <button className="action-Button" onClick={() => handle('adminpanel')}> Admin  </button>
+                <button className="action-Button" onClick={() => handle('admin_login')}> Admin  </button>
             </center>
         </div>
     );

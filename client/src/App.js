@@ -10,7 +10,7 @@ import Seller_home from './Pages/seller_home';
 import Seller_Create_Property from './Pages/seller_createProperty';
 import Property_details from './Pages/property_details';
 import DesignAdmin from './Pages/admin.js';
-
+import Admin_login from './Pages/admin_login';
 import Home from './Pages/Home';
 function App() {
   return (
@@ -21,6 +21,9 @@ function App() {
         </Route>
         <Route path="/adminpanel">
           <Route index element={<DesignAdmin />} />
+        </Route>
+        <Route path="/admin_login">
+          <Route index element={<Admin_login />} />
         </Route>
         <Route path="/Sellerlogin">
           <Route index element={<Seller_Login />} />

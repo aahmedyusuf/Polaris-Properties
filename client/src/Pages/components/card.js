@@ -6,53 +6,34 @@ export default function Card() {
     return (
         <>
             <div className="featured">
-                <div className="featuredItem">
-                    <span className="featuredTitle">Total house listed</span>
-                    <div className="featuredMoneyContainer">
-                        <span className="featuredMoney">200</span>
+            
+            <Card_info title={'Total property listed'} info ={'200'}/>
+            <Card_info title={'Total property Sold'} info ={'200'}/>
+            <Card_info title={'Total Unsold property'} info ={'200'}/>
+            <Card_info title={'Total Houses'} info ={'200'}/>
+            <Card_info title={'Total Apartments'} info ={'200'}/>
+            <Card_info title={'Average Commision'} info ={'200'}/>
+            <Card_info title={'Average View'} info ={'200'}/>
+            <Card_info title={'Current Listing'} info ={'200'}/>
 
-                    </div>
-                    <span className="featuredSub">This year data</span>
-                </div>
-                <div className="featuredItem">
-                    <span className="featuredTitle">Total House sold</span>
-                    <div className="featuredMoneyContainer">
-                        <span className="featuredMoney">89</span>
-                    </div>
-                    <span className="featuredSub">This year data</span>
-                </div>
-                <div className="featuredItem">
-                    <span className="featuredTitle">Total Unsold houses</span>
-                    <div className="featuredMoneyContainer">
-                        <span className="featuredMoney">21</span>
-                    </div>
-                    <span className="featuredSub">This year data</span>
-                </div>
-                <div className="featuredItem">
-                    <span className="featuredTitle">Average Commison</span>
-                    <div className="featuredMoneyContainer">
-                        <span className="featuredMoney">$5000</span>
-                    </div>
-                    <span className="featuredSub">Per sold house </span>
-                </div>
-                <div className="featuredItem">
-                    <span className="featuredTitle">Average View</span>
-                    <div className="featuredMoneyContainer">
-                        <span className="featuredMoney">200</span>
-                    </div>
-                    <span className="featuredSub">Per day in one listing </span>
-                </div>
-                <div className="featuredItem">
-                    <span className="featuredTitle">Current Listings</span>
-                    <div className="featuredMoneyContainer">
-                        <span className="featuredMoney">309</span>
-                    </div>
-                    <span className="featuredSub">Houses </span>
-                </div>
 
             </div>
             <Userdata />
         </>
     );
 
+}
+
+
+function Card_info({title, info}){
+    return(
+        <div className="featuredItem">
+        <span className="featuredTitle">{title}</span>
+        <div className="featuredMoneyContainer">
+            <span className="featuredMoney">{info}</span>
+
+        </div>
+        <span className="featuredSub">This year data</span>
+    </div>
+    )
 }
