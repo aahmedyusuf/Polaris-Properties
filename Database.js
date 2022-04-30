@@ -35,11 +35,11 @@ async function CreateUser(username, password, type){
     }
 }
 
-async function Create_Property(username, title, description, url, amount, state, city, zipcode, type, rooms, bathrooms,purchase ){
+async function Create_Property(username, title, description, url, amount, state, city, zipcode, type, rooms, bathrooms,sale_type ){
     try{
         console.log(username);
-        const response1 = await pool.query(`INSERT INTO property (username, title, description,url,amount,state,city,zipcode,type,rooms,bathrooms,purchase) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`, 
-        [username,title, description,url, amount, state, city, zipcode, type, rooms, bathrooms, purchase]);
+        const response1 = await pool.query(`INSERT INTO property (username, title, description,url,amount,state,city,zipcode,type,rooms,bathrooms,sale_type,sold) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13)`, 
+        [username,title, description,url, amount, state, city, zipcode, type, rooms, bathrooms, sale_type, 'false']);
 
         return 'true';
     }catch{
@@ -69,18 +69,20 @@ async function Get_AllProperties(){
     }
 }
 
-async function Get_Property(amount,state,city,zipcode,type,rooms,bathrooms ){
+async function Get_Property(amount,state,city,type,rooms){
     try{
+        amountOP=amount;
+        amountOP = amountOP.length!=0 ? '<=':'=';
+        console.log('amount = ' + amount);
+        amount = amount.length!=0 ? `${amount}`:'amount';
+        state = state.length!=0 ? `\'${state}\'`:'state';
+        city = city.length!=0? `\'${city}\'`:'city';
+        type = type.length!=0? `\'${type}\'`:'type';
+        rooms = rooms.length!=0 ? `\'${rooms}\'`:'rooms';
+        
 
-        amount = amount.length == 0 ? 'amount':amount;
-        state = state.length == 0 ? 'state':state;
-        city = city.length == 0 ? 'city':city;
-        zipcode = zipcode.length == 0 ? 'zipcode':zipcode;
-        type = type.length == 0 ? 'type':type;
-        rooms = rooms.length == 0 ? 'rooms':rooms;
-        bathrooms = bathrooms.length == 0 ? 'bathrooms':bathrooms;
-
-        const query = `select * from property where amount = '${amount}' And state = '${state}' And city = '${city}' & zipcode = '${zipcode}' & type = '${type}' & room = '${rooms}' & bathrooms = '${bathrooms}'`;
+        const query = `select * from property where amount ${amountOP} ${amount} And lower(state) = lower(${state}) And lower(city) = lower(${city}) And lower(type) = ${type} AND rooms = ${rooms}`;
+        console.log(query);
 
         const response = await pool.query(query);
 

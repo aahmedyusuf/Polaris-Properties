@@ -4,18 +4,27 @@ body{
 }
 .nav_parent{
     list-style-type: none;
-    margin: 0;
-    padding: 0;
     overflow: hidden;
     background-color: #333;
     height: 80px;
+    display: flex;
+    
 }
 
 
 .nav_button{
-    float: right;
+    
 }
-  
+.nav_field{
+}
+.nav_field input {
+    margin: 10px;
+    margin-top: 30px;
+    height: 20px;
+    width: 200px;
+    text-align: center;
+    text-decoration: none;
+}
 .nav_button a {
     display: block;
     color: white;

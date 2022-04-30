@@ -43,7 +43,7 @@ app.get("/api/getproperties", async (req, res) =>{
 })
 
 app.get("/api/getproperty", async (req, res) =>{
-  const response = await database.Get_Property(req.query.amount,req.query.state, req.query.city, req.query.zipcode,req.query.type, req.query.rooms, req.query.bathrooms);
+  const response = await database.Get_Property(req.query.amount,req.query.state, req.query.city,req.query.type, req.query.rooms);
   res.json(response);
 })
 app.get("/api/getpropertybyID", async (req, res) =>{

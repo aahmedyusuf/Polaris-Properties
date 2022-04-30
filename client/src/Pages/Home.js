@@ -10,7 +10,47 @@ import { endPoint } from './endpoint';
 function Home(){
     const username = sessionStorage.getItem('username');
     const type = sessionStorage.getItem('type');
-    console.log(type);
+    const [cards, setcards] = useState([]);
+
+    const searchField = {
+        city:'',
+        state:'',
+        price:'',
+        rooms:'',
+        type:''
+      };
+      const [search, setsearch] = useState(searchField);
+      useEffect(() => {
+        fetch(`${endPoint}/getproperties/`)
+        .then(response => response.json())
+        .then(data => {
+            setcards(data);
+            
+        })
+    },[]);
+
+      function handleSubmit(){
+          console.log(search.price);
+          fetch(`${endPoint}/getproperty/?` + new URLSearchParams({
+            amount:search.price,
+            state:search.state,
+            city:search.city,
+            zipcode:search.zipcode,
+            rooms:search.rooms,
+            type:search.type
+          }))
+          .then(response => response.json())
+          .then(data => {
+              console.log(data);
+              if(data == 'failed'){
+                setcards([]);
+              }else{
+                setcards(data);
+              }
+              
+          })
+      }
+
     if(username == null || type != 'customer'){
         return(
             <div>
@@ -22,33 +62,32 @@ function Home(){
     }else{
         return(
             <div>
-                <Navbar></Navbar>
-                <Card_Parent/>
+                <Navbar setsearch={setsearch} search={search} handleSubmit={handleSubmit}></Navbar>
+                <Card_Parent cards={cards}/>
             </div>
         )
     }
 }
-function Navbar(){
+function Navbar({search, setsearch, handleSubmit}){
 
     return (
         <ul className = 'nav_parent'>
-            <li className='nav_button'> <Link to="/"> <span onClick={() => sessionStorage.clear()}>Logout</span> </Link></li> 
+            
+            <li> <h2 style={{color:'white', padding:'10px'}}>Search Field: </h2> </li>
+
+            <li className = 'nav_field'> <input type='text' placeholder='City' name='city' onChange={(event) => setsearch({ ...search, city: event.target.value })}></input> </li>
+            <li className = 'nav_field'> <input type='text' placeholder='State' name='state' onChange={(event) => setsearch({ ...search, state: event.target.value })}></input> </li>
+            <li className = 'nav_field'> <input type='text' placeholder='Max price' name='price' onChange={(event) => setsearch({ ...search, price: event.target.value })}></input> </li>
+            <li className = 'nav_field'> <input type='text' placeholder='Rooms' name='rooms' onChange={(event) => setsearch({ ...search, rooms: event.target.value })}></input> </li>
+            <li className = 'nav_field'> <input type='text' placeholder='apartment/house' name='type' onChange={(event) => setsearch({ ...search, type: event.target.value })}></input> </li>
+
+            <li className='nav_button'> <Link to="#"> <span onClick={() => handleSubmit()}>Search</span> </Link></li> 
+            <li className='nav_button' style={{paddingLeft:'50px'}}> <Link to="/"> <span onClick={() => sessionStorage.clear()}>Logout</span> </Link></li> 
         </ul>
     );
 }
-function Card_Parent(){
+function Card_Parent({cards}){
 
-    const [cards, setcards] = useState([]);
-
-    useEffect(() => {
-        const username = sessionStorage.getItem('username');
-        fetch(`${endPoint}/getproperties/`)
-        .then(response => response.json())
-        .then(data => {
-            setcards(data);
-            
-        })
-    },[]);
 
     const listItems = cards.map((card,index) =>
         <Card key={index} props={card}/>
