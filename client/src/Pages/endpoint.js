@@ -1,4 +1,4 @@
 const localPoint = 'http://localhost:4000/api';
-const publicPoint = 'https://polaris-properties.herokuapp.com/';
+const publicPoint = 'https://polaris-properties.herokuapp.com/api';
 
-export const endPoint = publicPoint;
+export const endPoint = localPoint;

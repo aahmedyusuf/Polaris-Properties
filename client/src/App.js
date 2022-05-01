@@ -15,6 +15,8 @@ import Home from './Pages/Home';
 import CheckOut from './Pages/checkout';
 
 function App() {
+  document.title = 'Polaris';
+
   return (
     <BrowserRouter>
       <Routes>
