@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Admin_login() {
+
+
     const navigate = useNavigate();
 
     const user = {
@@ -26,7 +28,7 @@ function Admin_login() {
                     sessionStorage.setItem('username', login.username);
                     sessionStorage.setItem('password', login.password);
                     sessionStorage.setItem('type', 'admin');
-                    navigate('/adminpanel');
+                    navigate('/admin');
                     setlogin({ ...login, message: `` })
                 }
             })

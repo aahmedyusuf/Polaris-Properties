@@ -109,20 +109,45 @@ function Card({props}){
         console.log("button clicked")
     }
 
-    return(
-        <div className = 'Card'>
-            <img src = {props.url} className = 'Card_img'/>
-            <br/>
-            <center>
+    if(props.description.length > 70){
+        props.description = props.description.substring(0,70) + '... click for more info';
+    }
+
+    if(props.sold == 'false'){
+        return(
+            <div className = 'Card'>
+                <img src = {props.url} className = 'Card_img'/>
+                <br/>
+                <center>
+                    
+                <h3 className='Card_title'>{props.title}</h3>
+                <h5 className='Card_address'><BsFillGeoAltFill/> {props.city} , {props.state} , {props.zipcode}</h5>
+                <h5><FaBuilding/> {props.description}</h5>
+                <h4><BsCurrencyDollar/> Monthly Rent: ${props.amount}</h4>
                 
-            <h3 className='Card_title'>{props.title}</h3>
-            <h5 className='Card_address'><BsFillGeoAltFill/> {props.city} , {props.state} , {props.zipcode}</h5>
-            <h5><FaBuilding/> {props.description}</h5>
-            <h4><BsCurrencyDollar/> Monthly Rent: ${props.amount}</h4>
-            <button className = 'Card_Button' onClick={()=>handleSubmit()}>Click for more information</button>
-            </center>
-        </div>
-    )
+                <button className = 'Card_Button' onClick={()=>handleSubmit()}>Click for more information</button>
+
+                </center>
+            </div>
+        )
+    }else{
+        return(
+            <div className = 'Card'>
+                <img src = {props.url} className = 'Card_img'/>
+                <br/>
+                <center>
+                    
+                <h3 className='Card_title'>{props.title}</h3>
+                <h5 className='Card_address'><BsFillGeoAltFill/> {props.city} , {props.state} , {props.zipcode}</h5>
+                <h5><FaBuilding/> {props.description}</h5>
+                <h4><BsCurrencyDollar/> Monthly Rent: ${props.amount}</h4>
+                
+                <button className = 'Card_Button_Sold' >Item is Sold</button>
+
+                </center>
+            </div>
+        )
+    }
 }
 
 export default Home;

@@ -131,9 +131,10 @@ async function Get_MyProperties(username){
         return "failed";
     }
 }
-async function Remove_Property(id){
+async function Buy_Property(id){
     try{
-        const query = `DELETE FROM property WHERE id = ${id}`;
+        const query = `UPDATE property SET sold = 'true' WHERE id = ${id}`;
+        console.log(query);
         const response = await pool.query(query);
         return 'true';
     }catch{
@@ -141,4 +142,32 @@ async function Remove_Property(id){
     }
 }
 
-module.exports = {Connect, CreateUser,UpdateSeller, Get_Property, Get_AllProperties,VerifyUser,Create_Property,Get_MyProperties, Remove_Property,Get_Property_id}
+async function Admin_Panel(){
+    try{
+        const query_totalP = 'SELECT COUNT(id) AS value FROM property';
+        const query_totalSold = `SELECT COUNT(sold) AS value FROM property where sold = 'true'`;
+        const query_unSold = `SELECT COUNT(sold) AS value FROM property where sold = 'false'`;
+        const query_totalHouse = `SELECT COUNT(type) AS value FROM property where lower(type) = lower('house')`
+        const query_Apartments = `SELECT COUNT(type) AS value FROM property where lower(type) = lower('apartment')`
+
+        const response1 = await pool.query(query_totalP);
+        const response2 = await pool.query(query_totalSold);
+        const response3 = await pool.query(query_unSold);
+        const response4 = await pool.query(query_totalHouse);
+        const response5 = await pool.query(query_Apartments);
+
+        const reponse = {
+            total:response1.rows[0].value,
+            sold:response2.rows[0].value,
+            unsold:response3.rows[0].value,
+            house:response4.rows[0].value,
+            apartments:response5.rows[0].value,
+        }
+        return reponse;
+
+    }catch{
+        return 'something went wrong';
+    }
+}
+
+module.exports = {Connect, CreateUser,UpdateSeller, Get_Property, Get_AllProperties,VerifyUser,Create_Property,Get_MyProperties, Buy_Property,Get_Property_id,Admin_Panel}

@@ -59,8 +59,13 @@ app.post("/api/createproperty", async (req, res) =>{
   //res.json(response);
 })
 
-app.get("/api/remove_property", async (req, res) =>{
-  const response = await database.Remove_Property(req.query.id);
+app.get("/api/buyproperty", async (req, res) =>{
+  const response = await database.Buy_Property(req.query.id);
+  res.json(response);
+})
+
+app.get("/api/adminInfo", async (req, res) =>{
+  const response = await database.Admin_Panel();
   res.json(response);
 })
 

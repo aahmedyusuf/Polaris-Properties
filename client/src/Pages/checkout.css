@@ -1,0 +1,29 @@
+.checkout-form{
+    background-color:  rgb(255, 255, 255);
+    width: 500px;
+    height: 550px;
+    margin-top: 10%;
+    border-radius: 5%;
+    box-shadow: 10px 10px 10px rgb(184, 190, 184);
+}
+
+.checkout-button{
+    width: 300px;
+    height: 50px;
+    margin-top: 30px;
+    border-radius: 30px;
+    border: 0ch;
+    font-size: large;
+    transition: 1.5s;
+
+}
+.checkout-button:hover{
+    transition: 1.5s;
+    box-shadow: 10px 10px 10px rgb(184, 190, 184);
+    background-color: rgb(85, 255, 198);
+    cursor: pointer;
+}
+
+.title{
+    margin:auto;
+}

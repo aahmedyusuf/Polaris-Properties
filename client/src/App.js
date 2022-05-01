@@ -12,6 +12,8 @@ import Property_details from './Pages/property_details';
 import DesignAdmin from './Pages/admin.js';
 import Admin_login from './Pages/admin_login';
 import Home from './Pages/Home';
+import CheckOut from './Pages/checkout';
+
 function App() {
   return (
     <BrowserRouter>
@@ -19,7 +21,7 @@ function App() {
         <Route path="/">
           <Route index element={<Attentition_Page />} />
         </Route>
-        <Route path="/adminpanel">
+        <Route path="/admin">
           <Route index element={<DesignAdmin />} />
         </Route>
         <Route path="/admin_login">
@@ -48,6 +50,10 @@ function App() {
         </Route>
         <Route path="/home">
           <Route index element={<Home />} />
+        </Route>
+
+        <Route path="/checkout">
+          <Route index element={<CheckOut />} />
         </Route>
       </Routes>
     </BrowserRouter>

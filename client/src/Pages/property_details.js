@@ -28,6 +28,7 @@ function Navbar(){
 }
 
 function Details(){
+    const navigate = useNavigate();
 
     const [data, setdata] = useState('');
     useEffect(() => {
@@ -58,7 +59,7 @@ function Details(){
                     <h5 style={{ marginTop:'-25px'}}>Type: {data[0].purchase}</h5>
                     <h3>Payment =  <BsCurrencyDollar/>{data[0].amount}</h3>
                     
-                    <button className = 'Details_Button'>Buy</button>
+                    <button className = 'Details_Button' onClick={()=> navigate('/checkout')}>Buy</button>
                 </center>
             </div>
         )

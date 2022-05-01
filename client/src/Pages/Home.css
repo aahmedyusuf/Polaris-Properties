@@ -90,7 +90,15 @@ body{
     font-size: larger;
 
 }
-
+.Card_Button_Sold{
+    height: 40px;
+    width: 90%;
+    border-radius: 20px;
+    border: 0ch;
+    transition: 1s;
+    background-color: gainsboro;
+    font-size: larger;
+}
 .Card_Button:hover{
     transition: 1s;
     background-color: rgba(127, 193, 255, 0.966);
